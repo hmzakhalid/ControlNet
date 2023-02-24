@@ -12,7 +12,7 @@ pipeline {
 
         stage('Set up Python') {
             tools {
-                python '3.x'
+                python '3.8'
             }
             steps {
                 sh 'python --version'
