@@ -10,18 +10,22 @@ pipeline {
             }
         }
 
-        stage('Lint with flake8') {
+       stage('Lint with flake8') {
             steps {
-                sh 'pip install flake8'
-                sh 'flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics'
+                sh '/usr/local/bin/pip install flake8'
+                sh '/usr/local/bin/flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics'
             }
         }
 
         stage('Format with black') {
             steps {
-                sh 'pip install black'
-                sh 'black .'
+                sh '/usr/local/bin/pip install black'
+                sh '/usr/local/bin/black .'
             }
         }
     }
 }
+
+
+
+
