@@ -1,6 +1,10 @@
 pipeline {
     agent any
 
+    environment {
+        PATH = "${PATH}:${HOME}/.local/bin"
+    }
+
     stages {
         stage('Checkout SCM') {
             steps {
