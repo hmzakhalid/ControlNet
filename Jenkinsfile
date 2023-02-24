@@ -4,9 +4,11 @@ pipeline {
     stages {
         stage('Checkout SCM') {
             steps {
-                checkout([$class: 'GitSCM',
-                    branches: [[name: '*/i192011']],
-                    userRemoteConfigs: [[url: 'https://github.com/hmzakhalid/ControlNet.git']]])
+                dir('my-repo') {
+                    checkout([$class: 'GitSCM',
+                        branches: [[name: '*/i192011']],
+                        userRemoteConfigs: [[url: 'https://github.com/hmzakhalid/ControlNet.git']]])
+                }
             }
         }
 
