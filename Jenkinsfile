@@ -10,15 +10,6 @@ pipeline {
             }
         }
 
-        stage('Set up Python') {
-            tools {
-                python '3.8'
-            }
-            steps {
-                sh 'python --version'
-            }
-        }
-
         stage('Lint with flake8') {
             steps {
                 sh 'pip install flake8'
