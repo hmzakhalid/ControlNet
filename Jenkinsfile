@@ -10,22 +10,24 @@ pipeline {
             }
         }
 
-       stage('Lint with flake8') {
+        stage('Install pip') {
             steps {
-                sh '/usr/local/bin/pip install flake8'
-                sh '/usr/local/bin/flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics'
+                sh 'apt-get update && apt-get install -y python3-pip'
+            }
+        }
+
+        stage('Lint with flake8') {
+            steps {
+                sh 'pip3 install flake8'
+                sh 'flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics'
             }
         }
 
         stage('Format with black') {
             steps {
-                sh '/usr/local/bin/pip install black'
-                sh '/usr/local/bin/black .'
+                sh 'pip3 install black'
+                sh 'black .'
             }
         }
     }
 }
-
-
-
-
