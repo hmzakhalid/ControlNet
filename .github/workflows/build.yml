@@ -1,10 +1,10 @@
-name: Python CI
+name: CI Workflow
 
 on: 
   push:
-    branches: [main]
+    branches: [i192011]
   pull_request:
-    branches: [main]
+    branches: [i192011]
 
 jobs:
   build:
@@ -17,8 +17,33 @@ jobs:
       with:
         python-version: 3.x
 
+    - name: Install dependencies
+      run: |
+        conda env create -f environment.yml
+        conda activate my_env
+        pip install -r requirements.txt
+
     - name: Lint with flake8
       run: |
         pip install flake8
         flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics
+
+  security:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: run CodeQL
+      uses: github/codeql-action/init@v2
+      with:
+        languages: python
+        queries: +security-and-quality
+    
+    - name: run CodeQL
+      uses: github/codeql-action/analyze@v2
+      with:
+        languages: python
+        queries: +security-and-quality
+
+
+
 
